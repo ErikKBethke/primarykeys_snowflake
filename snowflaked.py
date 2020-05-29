@@ -144,7 +144,7 @@ def find_primary(frame, required_cols=None, exclude_cols=None, threshold=10, imp
         #frame = frame.drop(columns=exclude_cols)
         for col in exclude_cols:
             del dict_ucols[col]
-    ### if no required cols, set smallest repated val col as index
+    ### if no required cols, set smallest repeated val col as index
     if not required_cols:
         minCol = min(dict_ucols, key=dict_ucols.get)
         frame = frame.set_index(min(dict_ucols, key=dict_ucols.get))
@@ -155,6 +155,7 @@ def find_primary(frame, required_cols=None, exclude_cols=None, threshold=10, imp
     while not uniqueInd and (len(dict_ucols) > 0):
         minCol = min(dict_ucols, key=dict_ucols.get)
         df_improve = frame.set_index(min(dict_ucols, key=dict_ucols.get), append=True)
+        ## note: need to improve upon this metric evaluation
         if len(frame[frame.index.duplicated()]) * (1-improve) > len(df_improve[df_improve.index.duplicated()]):
             frame = df_improve
         del dict_ucols[minCol]
