@@ -136,12 +136,14 @@ def find_primary(frame, required_cols=None, exclude_cols=None, threshold=10, imp
     uniqueInd = False # boolean check for unique index
     if required_cols:
         frame = frame.set_index(required_cols) # set the index to required columns if passed
-    if exclude_cols:
-        frame = frame.drop(columns=exclude_cols)
     ### find number of unique values per column
     dict_ucols = {}
     for col in frame.columns.values:
         dict_ucols[col] = frame[col].value_counts().max()
+    if exclude_cols:
+        #frame = frame.drop(columns=exclude_cols)
+        for col in exclude_cols:
+            del dict_ucols[col]
     ### if no required cols, set smallest repated val col as index
     if not required_cols:
         minCol = min(dict_ucols, key=dict_ucols.get)

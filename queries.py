@@ -9,6 +9,20 @@ dict_queries = {}
 # need: variable with string query
 # need: add variable to dict_queries
 
+### covid_19
+str_pk_jhucovid = """
+SELECT *
+FROM load_prod.external_data.jhu_covid_19;
+"""
+dict_queries['str_pk_jhucovid'] = str_pk_jhucovid
+
+### success
+str_pk_success_score = """
+
+"""
+dict_queries['str_pk_success_score'] = str_pk_success_score
+
+
 ### bamboohr
 str_pk_bamboo_perms = """
 SELECT (supervisor_id||report_id), COUNT(*), concat(supervisor_id, report_id)
